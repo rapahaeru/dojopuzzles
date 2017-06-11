@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<title>Análise de url</title>
+</head>
+<body>
+	<section>
+		<header>
+			<h1>Análise de url</h1>
+			<p>Problema: Dada uma URL, desenvolva um programa que indique se a URL é válida ou não e, caso seja válida, retorne as suas partes constituintes.</p>
+		</header>
+		<form action="#">
+			<label>
+				<input type="text" id="url" placeholder="Digite url">
+			</label>
+			<!-- <button id="btn_ok">Ok</button> -->
+			<a href="#" id="link_ok">OK</a>
+		</form>
+		<div id="retorno"></div>
+	</section>
+</body>
+<script>
+
+	// https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
+
+	const _regEx = {
+			protocolo: '(^http(s)?:\/\/)'
+		};
+
+	var _retorno = document.querySelector('#retorno');
+
+	document.querySelector('#link_ok').addEventListener('click', () => {
+		let _url = document.querySelector('#url').value;
+
+		if (!urlIsValid(_url)) {
+			_retorno.innerHTML = "Url inválida";
+			return;
+		}
+		let protocolo = new RegExp(_regEx.protocolo);
+
+		if (protocolo.test(_url)) _retorno.innerHTML = 'Protocolo ==>' + _url.match(protocolo)[0] || "sem";
+
+	});
+
+	function urlIsValid(url) {
+		var pattern = new RegExp(_regEx.protocolo + // protocol
+		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
+		'((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+		'(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+		'(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+		return pattern.test(url);
+	}
+
+</script>
+</html>
