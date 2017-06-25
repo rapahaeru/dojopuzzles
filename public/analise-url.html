@@ -26,12 +26,16 @@
 
 	const _regEx = {
 			protocol: '(^http(s)?:\/\/)',
-			domain: '((([a-z\\d-]*[a-z\\d])\\.)+[a-z]{2,})'
+			domain: '((([a-z\\d-]*[a-z\\d])\\.)+[a-z]{2,})',
+			path: '((\\:\\d+)?(\\/[-a-z\\d%.]*)*)',
+			port: '(\\:\\d+)',
+			queryString: '(\\?[;&#~a-zA-Z._-\\d%=]*)' 
 		};
 
 	var _retorno = document.querySelector('#retorno');
 
 	document.querySelector('#link_ok').addEventListener('click', () => {
+
 		_retorno.innerHTML = "";
 		let _url = document.querySelector('#url').value;
 
@@ -40,11 +44,15 @@
 			return;
 		}
 		let protocol = new RegExp(_regEx.protocol),
-			domain = new RegExp(_regEx.domain);
+			domain = new RegExp(_regEx.domain),
+			queryString = new RegExp(_regEx.queryString);
+			port = new RegExp(_regEx.port);
 
 		if (domain.test(_url)) {
 			appendElement(_url, protocol, 'protocolo');
 			appendElement(_url, domain, 'Dominio');
+			appendElement(_url, port, 'porta');
+			appendElement(_url, queryString, 'query strings');
 		}
 
 	});
@@ -52,7 +60,7 @@
 
 	function appendElement (url, variable, variableString) {
 
-		var matching = (url.match(variable)[0]) || 'Erro (' + variable + ' não encontrado)';
+		var matching = (url.match(variable)) ? url.match(variable)[0] : variableString + ' não encontrado(a)';
 
 		let elementP = document.createElement('p');
 		elementP.append(variableString + ' ==> ' + matching);
