@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<title>Ano bissexto</title>
+</head>
+<body>
+	<section>
+		<header>
+			<h1>Ano bissexto</h1>
+			<p>A cada 4 anos, a diferença de horas entre o ano solar e o do calendário convencional completa cerca de 24 horas (mais exatamente: 23 horas, 15 minutos e 864 milésimos de segundo). Para compensar essa diferença e evitar um descompasso em relação às estações do ano, insere-se um dia extra no calendário e o mês de fevereiro fica com 29 dias. Essa correção é especialmente importante para atividades atreladas às estações, como a agricultura e até mesmo as festas religiosas.</p>
+			<p>Digite um ano e descubra se ano informado é bissexto ou não.</p>
+		</header>
+		<form action="#">
+			<label>
+				<input type="text" id="year" placeholder="1969" maxlength="4">
+			</label>
+			<a href="#" id="link_ok">OK</a>
+		</form>
+		<div id="display"></div>
+	</section>
+	<script type="text/javascript">
+
+		document.querySelector('#link_ok').addEventListener('click', () => {
+			display('');
+
+			var inputYear = document.querySelector('#year').value;
+
+			if (isAYear(inputYear)) {
+				isBissextile(inputYear);
+			} else {
+				display('Tem algo errado');
+			}
+		});
+
+		function display (info) {
+			let _display = document.querySelector('#display');
+			_display.innerHTML = info;
+		}
+
+		function isAYear(year) {
+			if (year.indexOf('.') !== -1 || isNaN(year) || year.length != 4)
+				return false
+			return true
+		}
+		
+		function isBissextile(year) {
+			let byFour = year % 4,
+				byHundred = year % 100,
+				byFourHundred = year % 400;
+
+				if (byFour == 0){
+					if (byHundred != 0) {
+						display('bissexto');
+					}else {
+						if (byFourHundred == 0)	
+							display('bissexto');
+						 else 
+							display('não bissexto');
+					}
+				} else {
+					display('não bissexto');
+				}
+		}
+
+	</script>
+</body>
+</html>
