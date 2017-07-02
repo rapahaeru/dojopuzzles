@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<title>Fizzbuzz</title>
+</head>
+<body>
+	<section>
+		<header>
+			<h1>Fizzbuzz</h1>
+			<p>	Exibir uma lista de 1 a 100, um em cada linha, com as seguintes exceções:</p>
+			<ul>
+				<li>Números divisíveis por 3 deve aparecer como 'Fizz';</li>
+				<li>Números divisíveis por 5 devem aparecer como 'Buzz';</li>
+				<li>Números divisíveis por 3 e 5 devem aparecer como 'FizzBuzz'</li>
+			</ul>			
+		</header>
+		<div id="display"></div>
+	</section>
+	<script type="text/javascript">
+
+	const numberOfLines = 100;
+
+	for (x=0; x<=numberOfLines; x++) {
+		let byThree = x % 3,
+			byFive = x % 5,
+			analyzed = isDivisible(x, byThree, byFive) || x;
+			displayAppended(analyzed);
+	}
+
+	function isDivisible(num, byThree, byFive) {
+		let returnInfo = '';
+
+		if (byThree == 0 && x != 0){
+			returnInfo = num + ': Fizz';
+			
+			if (byFive == 0 && x != 0)
+				returnInfo += 'buzz';
+		
+		}else if (byFive == 0 && x != 0){
+			returnInfo = num + ': Buzz';
+		} else {
+			return false
+		}
+
+		return returnInfo;
+	}
+
+	function displayAppended(info) {
+		let display = document.querySelector('#display'),
+			p = document.createElement('p');
+			p.append(info);
+			display.append(p);			
+	}
+	</script>
+</body>
+</html>
