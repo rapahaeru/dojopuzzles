@@ -6,7 +6,7 @@ class AnaliseUrlView extends View {
 
 	retornaResultado(url, variable, variableString) {
 
-		var matching = (url.match(variable)) ? url.match(variable)[0] : variableString + ' não encontrado(a)';
+		let matching = (url.match(variable)) ? url.match(variable)[0] : variableString + ' não encontrado(a)';
 
 		let elementP = document.createElement('p');
 		elementP.append(variableString + ' ==> ' + matching);
