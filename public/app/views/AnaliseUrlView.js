@@ -1,11 +1,7 @@
-class AnaliseUrlView {
+class AnaliseUrlView extends View {
 
 	constructor(elemento) {
-		this._elemento = elemento;
-	}
-
-	limpaAreaParaRetorno() {
-		this._elemento.innerHTML = "";
+		super(elemento)
 	}
 
 	retornaResultado(url, variable, variableString) {
@@ -16,8 +12,5 @@ class AnaliseUrlView {
 		elementP.append(variableString + ' ==> ' + matching);
 		this._elemento.append(elementP);
 	}
-
-	retornaMensagem(mensagem) {
-		this._elemento.innerHTML = mensagem;
-	}
+	
 }
