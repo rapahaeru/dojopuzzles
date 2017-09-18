@@ -4,12 +4,17 @@
 	"description": "testes utilizando dojopuzzles",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "mocha"
 	},
 	"author": "Cael ",
 	"license": "ISC",
 	"dependencies": {
 		"body-parser": "1.15.2",
 		"express": "4.14.0"
+	},
+	"devDependencies": {
+		"chai": "4.1.2",
+		"mocha": "3.5.3",
+		"mocha-phantomjs": "4.1.0"
 	}
 }
