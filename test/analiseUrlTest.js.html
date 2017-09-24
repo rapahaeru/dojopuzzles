@@ -3,8 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Análise de url</title>
+	<link href="../node_modules/mocha/mocha.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
+	<div id="mocha"></div>
 	<section>
 		<header>
 			<h1>Análise de url </h1>
@@ -26,11 +28,32 @@
 	<script type="text/javascript" src="../public/app/views/View.js"></script>
 	<script type="text/javascript" src="../public/app/views/AnaliseUrlView.js"></script>
 	<script type="text/javascript">
-		var analiseUrlController = new AnaliseUrlController();
 
 		var chai = window.chai,
-			assert = chai.assert;
+			assert = chai.assert,
+			invalidUrl = 'hhtp://google.com',
+			validUrl = 'http://www.google.com';
 
+			mocha.ui('bdd');
+
+		window.setTimeout(function () {
+
+			var analiseUrlController = new AnaliseUrlController();
+
+			describe('URL analysis', function() {
+				it('Should expect a invalid url response', function() {
+					assert.equal(analiseUrlController.UrlModel.urlEValida(invalidUrl), true);
+				});
+			});
+
+			if (window.mochaPhantomJS) {
+				mochaPhantomJS.run();
+			} else {
+				mocha.run();
+			}		
+
+
+		}, 3000);
 			
 	</script>
 </body>
