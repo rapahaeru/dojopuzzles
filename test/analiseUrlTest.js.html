@@ -37,7 +37,12 @@
 				'protocol': 'http://',
 				'domain': 'www.google.com',
 				'port': ':8080',
-				'queryStrings': '?teste=true' 
+				'queryStrings': '?teste=true'
+			},
+			incompleteUrl = {
+				'path': 'http://google.com',
+				'protocol': 'http://',
+				'domain': 'google.com'
 			};
 
 			mocha.ui('bdd');
@@ -54,28 +59,51 @@
 					assert.equal(analiseUrlController.UrlModel.urlEValida(validUrl.path), true);
 				});
 
-				describe('Should expect the component of the valid url', function() {
+				describe('Should expect the components of the valid url', function() {
 
 					it('Protocol component', function() {
 						let regExProtocol = analiseUrlController.UrlModel.componentesUrl(validUrl.path, 'protocol');
-						assert.equal(regExProtocol, validUrl.protocol);						
+						assert.equal(regExProtocol, validUrl.protocol);
 					});
 
 					it('Domain component', function() {
 						let regExDomain = analiseUrlController.UrlModel.componentesUrl(validUrl.path, 'domain');
-						assert.equal(regExDomain, validUrl.domain);						
+						assert.equal(regExDomain, validUrl.domain);
 					});
 
 					it('Port component', function() {
 						let regExPort = analiseUrlController.UrlModel.componentesUrl(validUrl.path, 'port');
-						assert.equal(regExPort, validUrl.port);						
+						assert.equal(regExPort, validUrl.port);
 					});
 
 					it('Query Strings component', function() {
 						let regExQueryStrings = analiseUrlController.UrlModel.componentesUrl(validUrl.path, 'queryString');
-						assert.equal(regExQueryStrings, validUrl.queryStrings);						
+						assert.equal(regExQueryStrings, validUrl.queryStrings);
 					});
 
+				});
+
+				describe('Should expect incomplete components of the valid url', function() {
+					
+					it('Protocol component', function() {
+						let regExProtocol = analiseUrlController.UrlModel.componentesUrl(incompleteUrl.path, 'protocol');
+						assert.equal(regExProtocol, incompleteUrl.protocol);
+					});
+
+					it('Domain component', function() {
+						let regExDomain = analiseUrlController.UrlModel.componentesUrl(incompleteUrl.path, 'domain');
+						assert.equal(regExDomain, incompleteUrl.domain);
+					});
+
+					it('Port component', function() {
+						let regExPort = analiseUrlController.UrlModel.componentesUrl(incompleteUrl.path, 'port');
+						assert.equal(regExPort, false);
+					});
+
+					it('Query strings component', function() {
+						let regExQueryString = analiseUrlController.UrlModel.componentesUrl(incompleteUrl.path, 'QueryString');
+						assert.equal(regExQueryString, false);
+					});
 				});
 
 			});
