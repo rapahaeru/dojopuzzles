@@ -12,8 +12,9 @@ class AnaliseUrl {
 	}
 
 
-	componentesUrl(RegExpName) {
-		return new RegExp(this.parametrosRegEx[RegExpName]);
+	componentesUrl(url, RegExpName) {
+		let regEx = new RegExp(this.parametrosRegEx[RegExpName]);
+		return (url.match(regEx)) ? url.match(regEx)[0] : false;
 	}
 
 	get parametrosRegEx() {

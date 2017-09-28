@@ -32,16 +32,52 @@
 		var chai = window.chai,
 			assert = chai.assert,
 			invalidUrl = 'hhtp://google.com',
-			validUrl = 'http://www.google.com';
+			validUrl = {
+				'path': 'http://www.google.com:8080?teste=true',
+				'protocol': 'http://',
+				'domain': 'www.google.com',
+				'port': ':8080',
+				'queryStrings': '?teste=true' 
+			};
 
 			mocha.ui('bdd');
 
 			var analiseUrlController = new AnaliseUrlController();
 
 			describe('URL analysis', function() {
+				
 				it('Should expect a invalid url response', function() {
 					assert.equal(analiseUrlController.UrlModel.urlEValida(invalidUrl), false);
 				});
+
+				it('Should expect a valid url response with a complete url path', function() {
+					assert.equal(analiseUrlController.UrlModel.urlEValida(validUrl.path), true);
+				});
+
+				describe('Should expect the component of the valid url', function() {
+
+					it('Protocol component', function() {
+						let regExProtocol = analiseUrlController.UrlModel.componentesUrl(validUrl.path, 'protocol');
+						assert.equal(regExProtocol, validUrl.protocol);						
+					});
+
+					it('Domain component', function() {
+						let regExDomain = analiseUrlController.UrlModel.componentesUrl(validUrl.path, 'domain');
+						assert.equal(regExDomain, validUrl.domain);						
+					});
+
+					it('Port component', function() {
+						let regExPort = analiseUrlController.UrlModel.componentesUrl(validUrl.path, 'port');
+						assert.equal(regExPort, validUrl.port);						
+					});
+
+					it('Query Strings component', function() {
+						let regExQueryStrings = analiseUrlController.UrlModel.componentesUrl(validUrl.path, 'queryString');
+						assert.equal(regExQueryStrings, validUrl.queryStrings);						
+					});
+
+				});
+
 			});
 
 			if (window.mochaPhantomJS) {

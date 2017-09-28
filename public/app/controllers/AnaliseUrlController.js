@@ -17,10 +17,10 @@ class AnaliseUrlController {
 			return;
 		}
 
-		this.UrlView.retornaResultado(_url, this.UrlModel.componentesUrl('protocol'), 'Protocolo');
-		this.UrlView.retornaResultado(_url, this.UrlModel.componentesUrl('domain'), 'Domínio');
-		this.UrlView.retornaResultado(_url, this.UrlModel.componentesUrl('port'), 'Porta');
-		this.UrlView.retornaResultado(_url, this.UrlModel.componentesUrl('queryString'), 'Query strings');
+		this.UrlView.retornaResultado(this.UrlModel.componentesUrl(_url, 'protocol'), 'Protocolo');
+		this.UrlView.retornaResultado(this.UrlModel.componentesUrl(_url, 'domain'), 'Domínio');
+		this.UrlView.retornaResultado(this.UrlModel.componentesUrl(_url, 'port'), 'Porta');
+		this.UrlView.retornaResultado(this.UrlModel.componentesUrl(_url, 'queryString'), 'Query strings');
 
 	}
 

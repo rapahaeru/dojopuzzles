@@ -4,12 +4,10 @@ class AnaliseUrlView extends View {
 		super(elemento)
 	}
 
-	retornaResultado(url, variable, variableString) {
-
-		let matching = (url.match(variable)) ? url.match(variable)[0] : variableString + ' não encontrado(a)';
+	retornaResultado(variable, variableString) {
 
 		let elementP = document.createElement('p');
-		elementP.append(variableString + ' ==> ' + matching);
+		elementP.append(variableString + ' ==> ' + ((variable) ? variable : 'não encontrado (a)'));
 		this._elemento.append(elementP);
 	}
 	
