@@ -11,6 +11,11 @@ class AnaliseUrl {
 		return pattern.test(url);
 	}
 
+
+	componentesUrl(RegExpName) {
+		return new RegExp(this.parametrosRegEx[RegExpName]);
+	}
+
 	get parametrosRegEx() {
 		return  {
 				protocol: '(^http(s)?:\/\/)',

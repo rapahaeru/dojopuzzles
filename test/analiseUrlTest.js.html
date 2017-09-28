@@ -36,13 +36,11 @@
 
 			mocha.ui('bdd');
 
-		window.setTimeout(function () {
-
 			var analiseUrlController = new AnaliseUrlController();
 
 			describe('URL analysis', function() {
 				it('Should expect a invalid url response', function() {
-					assert.equal(analiseUrlController.UrlModel.urlEValida(invalidUrl), true);
+					assert.equal(analiseUrlController.UrlModel.urlEValida(invalidUrl), false);
 				});
 			});
 
@@ -50,10 +48,7 @@
 				mochaPhantomJS.run();
 			} else {
 				mocha.run();
-			}		
-
-
-		}, 3000);
+			}
 			
 	</script>
 </body>
