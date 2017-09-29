@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<title>Fizzbuzz</title>
+	<link href="../node_modules/mocha/mocha.css" type="text/css" rel="stylesheet"/>
+</head>
+<body onload="fizzBuzzController.loadData()">
+	<div id="mocha"></div>
+	<section>
+		<header>
+			<h1>Fizzbuzz</h1>
+			<p>	Exibir uma lista de 1 a 100, um em cada linha, com as seguintes exceções:</p>
+			<ul>
+				<li>Números divisíveis por 3 deve aparecer como 'Fizz';</li>
+				<li>Números divisíveis por 5 devem aparecer como 'Buzz';</li>
+				<li>Números divisíveis por 3 e 5 devem aparecer como 'FizzBuzz'</li>
+			</ul>			
+		</header>
+		<div id="display"></div>
+	</section>
+	<script type="text/javascript" src="../node_modules/mocha/mocha.js"></script>
+	<script type="text/javascript" src="../node_modules/chai/chai.js"></script>
+
+	<script type="text/javascript" src="../public/app/controllers/fizzBuzzController.js"></script>
+	<script type="text/javascript" src="../public/app/models/FizzBuzz.js"></script>
+	<script type="text/javascript" src="../public/app/views/FizzBuzzView.js"></script>
+	<script type="text/javascript">
+		var fizzBuzzController = new FizzBuzzController();
+
+		var chai = window.chai,
+			assert = chai.assert,
+			FizzNumber = 9,
+			BuzzNumber = 10,
+			fizzBuzzNumber = 15,
+			ordinaryNumber = 8;
+			
+
+			mocha.ui('bdd');
+
+
+		describe('Fizz buzz Analysis', function() {
+
+			it('Should confirm the return "Fizz" (divisible by three) ', function() {
+			let divisibleByThree = FizzNumber % 3,
+				divisibleByFive = FizzNumber % 5;
+
+				assert.equal(fizzBuzzController.FizzBuzzModel.isDivisible(FizzNumber,divisibleByThree, divisibleByFive), FizzNumber + ': Fizz');
+			});
+
+			it('Should confirm the return "Buzz" (divisible by five) ', function() {
+			let divisibleByThree = BuzzNumber % 3,
+				divisibleByFive = BuzzNumber % 5;
+
+				assert.equal(fizzBuzzController.FizzBuzzModel.isDivisible(BuzzNumber,divisibleByThree, divisibleByFive), BuzzNumber + ': Buzz');
+			});
+
+			it('Should confirm the return "Buzz" (divisible by five and three) ', function() {
+			let divisibleByThree = fizzBuzzNumber % 3,
+				divisibleByFive = fizzBuzzNumber % 5;
+
+				assert.equal(fizzBuzzController.FizzBuzzModel.isDivisible(fizzBuzzNumber,divisibleByThree, divisibleByFive), fizzBuzzNumber + ': Fizzbuzz');
+			});
+
+			it('Should confirm a number that`s not divisible by three and five', function() {
+			let divisibleByThree = ordinaryNumber % 3,
+				divisibleByFive = ordinaryNumber % 5;
+
+				assert.equal(fizzBuzzController.FizzBuzzModel.isDivisible(ordinaryNumber,divisibleByThree, divisibleByFive), false);
+			});
+
+		});
+
+		if (window.mochaPhantomJS) {
+			mochaPhantomJS.run();
+		} else {
+			mocha.run();
+		}
+	</script>
+</body>
+</html>
