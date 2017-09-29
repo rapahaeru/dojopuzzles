@@ -1,8 +1,8 @@
 class BissextoController {
 
 	constructor() {
-		this._Bissexto = new Bissexto();
-		this._BissextoView = new BissextoView(document.querySelector('#retorno'));
+		this.BissextoModel = new Bissexto();
+		this.BissextoView = new BissextoView(document.querySelector('#retorno'));
 		
 	}
 
@@ -10,8 +10,8 @@ class BissextoController {
 		event.preventDefault();
 
 		let inputYear = document.querySelector('#year').value,
-			BissextoModel = this._Bissexto,
-			BissextoView = this._BissextoView;
+			BissextoModel = this.BissextoModel,
+			BissextoView = this.BissextoView;
 
 		BissextoView.limpaAreaParaRetorno();
 

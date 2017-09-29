@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<title>Ano bissexto</title>
+	<link href="../node_modules/mocha/mocha.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<div id="mocha"></div>
+	<section>
+		<header>
+			<h1>Ano bissexto</h1>
+			<p>A cada 4 anos, a diferença de horas entre o ano solar e o do calendário convencional completa cerca de 24 horas (mais exatamente: 23 horas, 15 minutos e 864 milésimos de segundo). Para compensar essa diferença e evitar um descompasso em relação às estações do ano, insere-se um dia extra no calendário e o mês de fevereiro fica com 29 dias. Essa correção é especialmente importante para atividades atreladas às estações, como a agricultura e até mesmo as festas religiosas.</p>
+			<p>Digite um ano e descubra se ano informado é bissexto ou não.</p>
+		</header>
+		<form action="#" onSubmit="bissextoController.verificaAno(event)">
+			<label>
+				<input type="text" id="year" placeholder="1969" maxlength="4">
+			</label>
+			<button href="#" id="link_ok">OK</button>
+		</form>
+		<div id="retorno"></div>
+	</section>
+	<script type="text/javascript" src="../node_modules/mocha/mocha.js"></script>
+	<script type="text/javascript" src="../node_modules/chai/chai.js"></script>
+
+	<script type="text/javascript" src="../public/app/models/Bissexto.js"></script>
+	<script type="text/javascript" src="../public/app/controllers/BissextoController.js"></script>
+	<script type="text/javascript" src="../public/app/views/View.js"></script>
+	<script type="text/javascript" src="../public/app/views/BissextoView.js"></script>
+	<script type="text/javascript">
+		bissextoController = new BissextoController();
+		
+		var chai = window.chai,
+			assert = chai.assert,
+			validYear = '1981',
+			invalidYear = '208787',
+			BissextileYear = '2000';
+
+			mocha.ui('bdd');
+
+
+		describe('Bissextile year analysis', function() {
+		
+			it('Should expect a valid year', function() {
+				assert.equal(bissextoController.BissextoModel.isAYear(validYear), true);
+			});
+
+			it('Should expect a invalid year validation', function() {
+				assert.equal(bissextoController.BissextoModel.isAYear(invalidYear), false);
+			});
+
+			it('Should expect confirmation of a bissextile year', function() {
+				assert.equal(bissextoController.BissextoModel.isBissextile(BissextileYear), true);
+			});
+
+			it('Should expect confirmation of a no bissextile year', function() {
+				assert.equal(bissextoController.BissextoModel.isBissextile(validYear), false);
+			});
+
+		});
+
+		if (window.mochaPhantomJS) {
+			mochaPhantomJS.run();
+		} else {
+			mocha.run();
+		}
+
+	</script>
+</body>
+</html>
